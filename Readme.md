@@ -2,6 +2,8 @@
 
 A lightweight Python-based log analysis tool that parses application logs, categorizes entries by severity level, and displays key insights through an interactive dashboard.
 
+![Dashboard Preview](templates/dashboard.png)
+
 ## ✨ Features
 
 - Parse and analyze log files
