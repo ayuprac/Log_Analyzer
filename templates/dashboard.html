@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <!-- below line is for auto_refresh, content in seconds -->
+
+ <!-- <meta http-equiv="refresh" content="5"> -->
+  
+  <title>Log Analyzer Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .card { border: 1px solid #ddd; padding: 16px; border-radius: 10px; margin-bottom: 14px; }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .badge { display:inline-block; padding:6px 10px; border-radius: 999px; background:#f2f2f2; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; }
+    .muted { color: #666; font-size: 14px; }
+    .topbar { display:flex; justify-content: space-between; align-items:center; gap:12px; }
+    a.button { text-decoration:none; border:1px solid #ddd; padding:8px 12px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div>
+      <h2>Log Analyzer Dashboard</h2>
+      <div class="muted">
+        Folder: <b>{{ data.log_dir }}</b> • Last updated: {{ data.last_updated }}
+      </div>
+    </div>
+    <div>
+      <a class="button" href="/">Refresh</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="badge">Parsed lines: {{ data.parsed_count }}</div>
+    <div class="badge">Invalid lines: {{ data.invalid_count }}</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>INFO</h3>
+      <p style="font-size:32px; margin:0;">
+        {{ data.level_counts.get("INFO", 0) }}
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>WARNING</h3>
+      <p style="font-size:32px; margin:0;">
+        {{ data.level_counts.get("WARNING", 0) }}
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>ERROR</h3>
+      <p style="font-size:32px; margin:0;">
+        {{ data.level_counts.get("ERROR", 0) }}
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Top Error Messages</h3>
+
+    {% if data.top_errors %}
+      <table>
+        <thead>
+          <tr>
+            <th>Error message</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for msg, cnt in data.top_errors %}
+            <tr>
+              <td>{{ msg }}</td>
+              <td>{{ cnt }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="muted">No ERROR messages found.</p>
+    {% endif %}
+  </div>
+
+</body>
+</html>

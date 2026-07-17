@@ -1,0 +1,24 @@
+SUMMARY
+Total parsed logs,7
+Total invalid logs,0
+INFO,3
+WARNING,1
+ERROR,3
+
+TOP 10 ERROR MESSAGES
+Error message,Count
+Timeout while connecting to API,2
+Database connection failed,1
+
+PARSED LOG DETAILS
+file,line,timestamp,level,message
+sample.log,1,2026-03-01 10:10:23,INFO,User login successful
+sample.log,2,2026-03-01 10:10:45,ERROR,Database connection failed
+sample.log,3,2026-03-01 10:11:02,WARNING,Disk usage 90%
+sample.log,4,2026-03-01 10:11:30,INFO,File uploaded
+sample.log,5,2026-03-01 10:12:10,ERROR,Timeout while connecting to API
+sample.log,6,2026-03-01 10:12:11,ERROR,Timeout while connecting to API
+sample.log,7,2026-03-01 10:12:12,INFO,Health check OK
+
+INVALID / UNPARSEABLE LINES
+file,line,raw
